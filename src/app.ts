@@ -1,17 +1,18 @@
-import express, { Application, Request, Response, urlencoded } from 'express'
+import express, { Application, Request, Response } from 'express'
+import cors from 'cors'
+import userRoute from './app/modules/user/user.route'
 
 const app: Application = express()
-const port = 3000
-
-import cors from 'cors'
 
 app.use(cors())
 app.use(express.json())
 
 app.use(express.urlencoded({ extended: true }))
 
-// Testing Route
-app.get('/', (req: Request, res: any) => {
+// Application Route
+app.use('/api/v1/users', userRoute)
+// Testing Routes
+app.get('/', (req: Request, res: Response) => {
   res.send('Route Properly Working')
 })
 
